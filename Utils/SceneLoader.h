@@ -23,6 +23,7 @@ namespace Utilities
 			unsigned int m_id;
 			std::string m_modelFile;
 			bool m_isDynamic;
+			bool m_isIce;
 			Real m_density;
 			Vector3r m_x;
 			Quaternionr m_q;

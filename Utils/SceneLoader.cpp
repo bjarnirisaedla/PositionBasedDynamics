@@ -225,6 +225,10 @@ void SceneLoader::readRigidBodies(const nlohmann::json &j, const std::string &ke
 			rbd.m_isDynamic = true;
 			readValue(rigidBody, "isDynamic", rbd.m_isDynamic);
 
+			// is ice
+			rbd.m_isIce = false;
+			readValue(rigidBody, "isIce", rbd.m_isIce);
+
 			// density
 			rbd.m_density = 1.0;
 			readValue(rigidBody, "density", rbd.m_density);

@@ -70,6 +70,8 @@ namespace PBD
 			Vector3r m_transformation_v1;
 			Vector3r m_transformation_v2;
 			Vector3r m_transformation_R_X_v1;
+
+			bool m_isIce;
 			
 		public:
 			RigidBody(void) 
@@ -83,7 +85,7 @@ namespace PBD
 			void initBody(const Real mass, const Vector3r &x, 
 				const Vector3r &inertiaTensor, const Quaternionr &rotation, 
 				const VertexData &vertices, const Utilities::IndexedFaceMesh &mesh, 
-				const Vector3r &scale = Vector3r(1.0, 1.0, 1.0))
+				const Vector3r &scale = Vector3r(1.0, 1.0, 1.0), const bool isIce = false)
 			{
 				setMass(mass);
 				m_x = x; 
@@ -111,10 +113,12 @@ namespace PBD
 
 				getGeometry().initMesh(vertices.size(), mesh.numFaces(), &vertices.getPosition(0), mesh.getFaces().data(), mesh.getUVIndices(), mesh.getUVs(), scale);
 				getGeometry().updateMeshTransformation(getPosition(), getRotationMatrix());
+
+				m_isIce = isIce;
 			}
 
 			void initBody(const Real density, const Vector3r &x, const Quaternionr &rotation,
-				const VertexData &vertices, const Utilities::IndexedFaceMesh &mesh, const Vector3r &scale = Vector3r(1.0, 1.0, 1.0))
+				const VertexData &vertices, const Utilities::IndexedFaceMesh &mesh, const Vector3r &scale = Vector3r(1.0, 1.0, 1.0), const bool isIce = false)
 			{
 				m_mass = 1.0;
 				m_inertiaTensor = Vector3r(1.0, 1.0, 1.0);
@@ -140,6 +144,8 @@ namespace PBD
 				getGeometry().initMesh(vertices.size(), mesh.numFaces(), &vertices.getPosition(0), mesh.getFaces().data(), mesh.getUVIndices(), mesh.getUVs(), scale);
 				determineMassProperties(density);
 				getGeometry().updateMeshTransformation(getPosition(), getRotationMatrix());
+
+				m_isIce = isIce;
 			}
 
 			void reset()
@@ -569,6 +575,11 @@ namespace PBD
 			{
 				return m_geometry;
 			}
+
+			FORCE_INLINE bool isIce() const
+            {
+			    return m_isIce;
+            }
 	};
 }
 
