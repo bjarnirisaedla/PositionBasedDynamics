@@ -429,7 +429,7 @@ namespace PBD
 			FORCE_INLINE void setRotation(const Quaternionr &value)
 			{
 				m_q = value;
-				rotationUpdated;
+				rotationUpdated();
 			}
 
 			FORCE_INLINE Quaternionr &getLastRotation()
