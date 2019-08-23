@@ -31,7 +31,7 @@ namespace Utilities
 
 		static void loadObj(const std::string &filename, std::vector<Vec3f> *x, std::vector<MeshFaceIndices> *faces, std::vector<Vec3f> *normals, std::vector<Vec2f> *texcoords, const Vec3f &scale)
 		{
-			LOG_INFO << "Loading " << filename;
+			// LOG_INFO << "Loading " << filename;
 			
 			std::ifstream filestream;
 			filestream.open(filename.c_str());
